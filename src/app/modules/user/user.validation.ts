@@ -43,10 +43,7 @@ const userValidationSchema = z.object({
   password: z
     .string()
     .min(1)
-    .max(20, { message: 'Password cannot be more than 20 characters' })
-    .refine((value) => value.trim().length > 0, {
-      message: 'Password is required',
-    }),
+    .max(20, { message: 'Password cannot be more than 20 characters' }),
   fullName: userNameValidationSchema.refine(
     (value) =>
       Object.values(value).every((namePart) => namePart.trim().length > 0),

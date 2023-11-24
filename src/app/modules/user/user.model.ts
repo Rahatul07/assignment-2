@@ -6,7 +6,8 @@ import {
   TUserName,
   UserModel,
 } from './user.interface';
-
+import bcrypt from 'bcrypt';
+import config from '../../config';
 const userNameSchema = new Schema<TUserName>({
   firstName: { type: String },
   lastName: { type: String },
@@ -41,7 +42,10 @@ const userSchema = new Schema<TUser>({
     type: userNameSchema,
   },
   age: { type: Number },
-  email: { type: String },
+  email: {
+    type: String,
+    unique: true,
+  },
   isActive: { type: Boolean },
   hobbies: {
     type: String,
@@ -52,6 +56,25 @@ const userSchema = new Schema<TUser>({
   },
   address: { type: addressSchema },
   orders: { type: ordersSchema },
+});
+// Pre save middleware/hook: using to hashing password
+userSchema.pre('save', async function (next) {
+  this.password = await bcrypt.hash(
+    this.password,
+    Number(config.bcrypt_salt_rounds),
+  );
+  next();
+});
+// Post save middleware/hook
+userSchema.post('save', function (doc, next) {
+  next();
+});
+// Set the toJSON transform function to remove the password field
+userSchema.set('toJSON', {
+  transform: function (doc, ret) {
+    delete ret.password;
+    return ret;
+  },
 });
 // Created a model
 export const User = model<TUser, UserModel>('User', userSchema);

@@ -4,14 +4,9 @@ import userValidationSchema from './user.validation';
 const createUser = async (req: Request, res: Response) => {
   try {
     const user = req.body;
-    if (!user) {
-      return res.status(400).json({
-        success: false,
-        message: 'User data is missing in the request body',
-      });
-    }
     const zodParseData = userValidationSchema.parse(user);
     const result = await UserServices.createUserIntoDB(zodParseData);
+
     res.status(200).json({
       success: true,
       message: 'User has been created successfully',
@@ -29,6 +24,7 @@ const createUser = async (req: Request, res: Response) => {
 const getAllUser = async (req: Request, res: Response) => {
   try {
     const result = await UserServices.getAllUserFromDB();
+
     res.status(200).json({
       success: true,
       message: 'User has been retrieved successfully',
