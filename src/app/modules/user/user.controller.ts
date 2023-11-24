@@ -1,9 +1,17 @@
 import { Request, Response } from 'express';
 import { UserServices } from './user.service';
+import userValidationSchema from './user.validation';
 const createUser = async (req: Request, res: Response) => {
   try {
     const { user: userData } = req.body;
-    const result = await UserServices.createUserIntoDB(userData);
+    if (!userData) {
+      return res.status(400).json({
+        success: false,
+        message: 'User data is missing in the request body',
+      });
+    }
+    const zodParseData = userValidationSchema.parse(userData);
+    const result = await UserServices.createUserIntoDB(zodParseData);
     res.status(200).json({
       success: true,
       message: 'User has been created successfully',

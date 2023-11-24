@@ -6,7 +6,7 @@ async function main() {
     await mongoose.connect(config.database_url as string);
     app.listen(config.port, () => {
       // eslint-disable-next-line no-console
-      console.log(`User app listening on port ${config.port}`);
+      console.log(`Server is running on port ${config.port}`);
     });
   } catch (err) {
     // eslint-disable-next-line no-console
