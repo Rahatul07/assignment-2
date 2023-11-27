@@ -13,7 +13,7 @@ app.use('/api/users', orderRouter);
 
 app.get('/', (req: Request, res: Response) => {
   return res.status(200).send({
-    message: 'Server is up and running',
+    message: 'Welcome to the api of assignment',
     status: 200,
   });
 });
