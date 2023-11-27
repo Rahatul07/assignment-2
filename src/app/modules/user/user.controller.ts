@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { UserModel } from './user.model';
 import { UserJoiValidation, updateUserJoiValidation } from './user.validate';
 import { SUserCreate } from './user.service';
-
+// Create a user
 export const createUser = async (req: Request, res: Response) => {
   try {
     const user = await req.body;
@@ -21,7 +21,6 @@ export const createUser = async (req: Request, res: Response) => {
       message: 'User created successfully!',
       data: result,
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return res.status(500).send({
       success: false,
@@ -30,7 +29,7 @@ export const createUser = async (req: Request, res: Response) => {
     });
   }
 };
-
+// Get all the users
 export const getUsers = async (req: Request, res: Response) => {
   try {
     const result = await UserModel.find(
@@ -42,7 +41,6 @@ export const getUsers = async (req: Request, res: Response) => {
       message: 'Users fetched successfully!',
       data: result,
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return res.status(500).send({
       success: false,
@@ -51,7 +49,7 @@ export const getUsers = async (req: Request, res: Response) => {
     });
   }
 };
-
+// Get a single user
 export const getSingleUser = async (req: Request, res: Response) => {
   try {
     const { userId } = await req.params;
@@ -70,7 +68,6 @@ export const getSingleUser = async (req: Request, res: Response) => {
       message: 'User fetched successfully!',
       data: result,
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return res.status(500).send({
       success: false,
@@ -82,7 +79,7 @@ export const getSingleUser = async (req: Request, res: Response) => {
     });
   }
 };
-
+// Update a user
 export const updateUser = async (req: Request, res: Response) => {
   try {
     const { userId } = await req.params;
@@ -111,7 +108,6 @@ export const updateUser = async (req: Request, res: Response) => {
       message: 'User updated successfully!',
       data: result,
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return res.status(500).send({
       success: false,
@@ -123,7 +119,7 @@ export const updateUser = async (req: Request, res: Response) => {
     });
   }
 };
-
+// Delete a user
 export const deleteUser = async (req: Request, res: Response) => {
   try {
     const { userId } = await req.params;
@@ -137,7 +133,6 @@ export const deleteUser = async (req: Request, res: Response) => {
       message: 'User deleted successfully!',
       data: null,
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return res.status(500).send({
       success: false,

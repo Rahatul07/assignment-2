@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { UserModel } from '../user/user.model';
 import { fetchingOrders, orderInsert, totalPrice } from './order.service';
 import { OrdersJoi } from '../user/user.validate';
-
+// Create an order
 export const insertOrders = async (req: Request, res: Response) => {
   try {
     const { value, error } = await OrdersJoi.validate(req.body);
@@ -24,7 +24,6 @@ export const insertOrders = async (req: Request, res: Response) => {
       message: 'Order created successfully!',
       data: null,
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return res.status(500).send({
       success: false,
@@ -36,7 +35,7 @@ export const insertOrders = async (req: Request, res: Response) => {
     });
   }
 };
-
+// get an order
 export const getOrders = async (req: Request, res: Response) => {
   try {
     const { userId } = await req.params;
@@ -51,7 +50,6 @@ export const getOrders = async (req: Request, res: Response) => {
       message: 'Order fetched successfully!',
       data: result,
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return res.status(500).send({
       success: false,
@@ -63,7 +61,7 @@ export const getOrders = async (req: Request, res: Response) => {
     });
   }
 };
-
+// Get total order price
 export const getTotalPrice = async (req: Request, res: Response) => {
   try {
     const { userId } = await req.params;
@@ -78,7 +76,6 @@ export const getTotalPrice = async (req: Request, res: Response) => {
       message: 'Total price calculated successfully!',
       data: result,
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return res.status(500).send({
       success: false,

@@ -1,11 +1,11 @@
 import Joi from 'joi';
-
+// Order Validation
 export const OrdersJoi = Joi.object({
   productName: Joi.string().required(),
   price: Joi.number().required(),
   quantity: Joi.number().required(),
 });
-
+// User validation
 export const UserJoiValidation = Joi.object({
   userId: Joi.number().required(),
   username: Joi.string().required(),
@@ -25,7 +25,7 @@ export const UserJoiValidation = Joi.object({
   }).required(),
   orders: Joi.array().items(OrdersJoi).default([]),
 });
-
+// update user validation
 export const updateUserJoiValidation = Joi.object({
   userId: Joi.number(),
   username: Joi.string(),

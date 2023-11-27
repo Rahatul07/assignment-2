@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
 import { ExistingUser, UserInterface } from './user.interface';
 import bcrypt from 'bcrypt';
-
+// User Schema defined
 export const UserSchema = new Schema<UserInterface, ExistingUser>(
   {
     userId: {
@@ -64,7 +64,7 @@ export const UserSchema = new Schema<UserInterface, ExistingUser>(
 UserSchema.statics.isExistingUser = function (userId: string) {
   return this.findOne({ userId });
 };
-
+// Hashing Password
 UserSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, 10);
   next();

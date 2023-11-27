@@ -1,6 +1,6 @@
 import { Orders } from '../user/user.interface';
 import { UserModel } from '../user/user.model';
-
+// Create an order
 export const orderInsert = async (id: string, order: Orders) => {
   return await UserModel.updateOne(
     { userId: id },
@@ -19,7 +19,7 @@ export const orderInsert = async (id: string, order: Orders) => {
 export const fetchingOrders = async (id: string) => {
   return await UserModel.findOne({ userId: id }, { orders: 1, _id: 0 });
 };
-
+// Sum of the orders
 export const totalPrice = async (id: string) => {
   return await UserModel.aggregate([
     {
